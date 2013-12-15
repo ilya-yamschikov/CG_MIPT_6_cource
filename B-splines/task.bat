@@ -1,0 +1,1 @@
+java -jar target\bsplines-1.0.jar
