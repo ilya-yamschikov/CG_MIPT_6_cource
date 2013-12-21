@@ -3,13 +3,18 @@ import geometry.Mesh;
 import javax.media.opengl.*;
 import javax.media.opengl.awt.GLCanvas;
 import javax.media.opengl.glu.GLU;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+
 import static javax.media.opengl.GL.*;  // GL constants
 import static javax.media.opengl.GL2.*; // GL2 constants
 
-public class MyJoglCanvas extends GLCanvas implements GLEventListener {
+public class MyJoglCanvas extends GLCanvas implements GLEventListener, MouseListener, MouseMotionListener {
     private GLU glu;  // for the GL Utility
 
-    private float rotation = 0.0f;
+    private float rotationX = 0.0f;
+    private float rotationY = 0.0f;
 
     private Model model = new Model(Mesh.CUBE);
 
@@ -18,10 +23,14 @@ public class MyJoglCanvas extends GLCanvas implements GLEventListener {
     private final float[] BLACK = {0.0f, 0.0f, 0.0f, 1.0f};
     private final float[] RED = {1.0f, 0.0f, 0.0f, 1.0f};
 
+    private int mousePositionX;
+    private int mousePositionY;
+
     public MyJoglCanvas() {
         this.addGLEventListener(this);
     }
 
+    @Override
     public void init(GLAutoDrawable drawable) {
         GL2 gl = drawable.getGL().getGL2();
         glu = new GLU();                         // get GL Utilities
@@ -34,6 +43,8 @@ public class MyJoglCanvas extends GLCanvas implements GLEventListener {
         gl.glEnable(GL_LIGHTING);
         gl.glEnable(GL_LIGHT0);
     }
+
+    @Override
     public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
         GL2 gl = drawable.getGL().getGL2();  // get the OpenGL 2 graphics context
 
@@ -53,6 +64,7 @@ public class MyJoglCanvas extends GLCanvas implements GLEventListener {
         gl.glLoadIdentity(); // reset
     }
 
+    @Override
     public void display(GLAutoDrawable drawable) {
         GL2 gl = drawable.getGL().getGL2();  // get the OpenGL 2 graphics context
         gl.glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear color and depth buffers
@@ -60,13 +72,37 @@ public class MyJoglCanvas extends GLCanvas implements GLEventListener {
 
         // ----- Your OpenGL rendering code here (Render a white triangle for testing) -----
         gl.glLightfv(GL_LIGHT0, GL_POSITION, new float[]{1.0f, 4.0f, 1.0f, 1.0f}, 0);
-        rotation += 1.5f;
         gl.glPushMatrix();
         gl.glTranslatef(-1.5f, -1.5f, -6.0f); // translate into the screen
-        gl.glRotatef(rotation , 0.0f, 1.0f, 0.0f); // rotate about the y-axis
+        gl.glRotatef(rotationX , 0.0f, 1.0f, 0.0f);
+        gl.glRotatef(rotationY , 1.0f, 0.0f, 0.0f);
         model.draw(gl);
         gl.glPopMatrix();
     }
 
+    @Override
     public void dispose(GLAutoDrawable drawable) {}
+
+    public void mouseClicked(MouseEvent e) {}
+
+    public void mousePressed(MouseEvent e) {
+        mousePositionX = e.getX();
+        mousePositionY = e.getY();
+    }
+
+    public void mouseReleased(MouseEvent e) {}
+
+    public void mouseEntered(MouseEvent e) {}
+
+    public void mouseExited(MouseEvent e) {}
+
+    public void mouseDragged(MouseEvent e) {
+        rotationX += (e.getX() - mousePositionX)/ 2.0f;
+        mousePositionX = e.getX();
+        rotationY += (e.getY() - mousePositionY)/ 2.0f;
+        mousePositionY = e.getY();
+    }
+
+    public void mouseMoved(MouseEvent e) {}
+
 }

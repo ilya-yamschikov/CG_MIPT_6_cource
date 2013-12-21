@@ -18,7 +18,7 @@ public class Main {
             @Override
             public void run() {
                 // Create the OpenGL rendering canvas
-                GLCanvas canvas = new MyJoglCanvas();
+                MyJoglCanvas canvas = new MyJoglCanvas();
                 canvas.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
 
                 // Create a animator that drives canvas' display() at the specified FPS.
@@ -41,6 +41,8 @@ public class Main {
                         }.start();
                     }
                 });
+                canvas.addMouseListener(canvas);
+                canvas.addMouseMotionListener(canvas);
                 frame.setTitle(TITLE);
                 frame.pack();
                 frame.setVisible(true);

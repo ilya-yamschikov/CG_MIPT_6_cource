@@ -17,6 +17,7 @@ public class Model {
     private void draw(GL2 gl, Mesh mesh) {
         for (Face face: mesh.getFaces()) {
             gl.glBegin(GL2.GL_POLYGON);
+            gl.glColor3fv(face.getColor(), 0);
             if (face.getNormal() != null)
                 gl.glNormal3dv(face.getNormal(), 0);
             for (int pointID: face.points) {
