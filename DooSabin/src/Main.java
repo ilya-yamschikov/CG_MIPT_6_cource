@@ -1,6 +1,5 @@
 import com.jogamp.opengl.util.FPSAnimator;
 
-import javax.media.opengl.awt.GLCanvas;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
@@ -18,15 +17,30 @@ public class Main {
             @Override
             public void run() {
                 // Create the OpenGL rendering canvas
-                MyJoglCanvas canvas = new MyJoglCanvas();
-                canvas.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
+                MyJoglPanel GLPanel = new MyJoglPanel();
+                GLPanel.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
 
                 // Create a animator that drives canvas' display() at the specified FPS.
-                final FPSAnimator animator = new FPSAnimator(canvas, FPS, true);
+                final FPSAnimator animator = new FPSAnimator(GLPanel, FPS, true);
 
                 // Create the top-level container
                 final JFrame frame = new JFrame(); // Swing's JFrame or AWT's Frame
-                frame.getContentPane().add(canvas);
+
+                //SETTINGS
+                ImageIcon downButtonIcon = new ImageIcon("down.png");
+                ImageIcon upButtonIcon = new ImageIcon("up.png");
+                JPanel settingsPanel = new JPanel();
+                JButton buttonUp = new JButton();
+                buttonUp.setIcon(upButtonIcon);
+                JButton buttonDown = new JButton();
+                buttonDown.setIcon(downButtonIcon);
+                settingsPanel.add(buttonUp);
+                settingsPanel.add(buttonDown);
+                Container pane = frame.getContentPane();
+                pane.add(settingsPanel, BorderLayout.LINE_END);
+
+
+                pane.add(GLPanel);
                 frame.addWindowListener(new WindowAdapter() {
                     @Override
                     public void windowClosing(WindowEvent e) {
@@ -41,8 +55,8 @@ public class Main {
                         }.start();
                     }
                 });
-                canvas.addMouseListener(canvas);
-                canvas.addMouseMotionListener(canvas);
+                GLPanel.addMouseListener(GLPanel);
+                GLPanel.addMouseMotionListener(GLPanel);
                 frame.setTitle(TITLE);
                 frame.pack();
                 frame.setVisible(true);

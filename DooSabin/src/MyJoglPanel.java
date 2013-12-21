@@ -1,7 +1,7 @@
 import geometry.Mesh;
 
 import javax.media.opengl.*;
-import javax.media.opengl.awt.GLCanvas;
+import javax.media.opengl.awt.GLJPanel;
 import javax.media.opengl.glu.GLU;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -10,7 +10,7 @@ import java.awt.event.MouseMotionListener;
 import static javax.media.opengl.GL.*;  // GL constants
 import static javax.media.opengl.GL2.*; // GL2 constants
 
-public class MyJoglCanvas extends GLCanvas implements GLEventListener, MouseListener, MouseMotionListener {
+public class MyJoglPanel extends GLJPanel implements GLEventListener, MouseListener, MouseMotionListener {
     private GLU glu;  // for the GL Utility
 
     private float rotationX = 0.0f;
@@ -26,7 +26,7 @@ public class MyJoglCanvas extends GLCanvas implements GLEventListener, MouseList
     private int mousePositionX;
     private int mousePositionY;
 
-    public MyJoglCanvas() {
+    public MyJoglPanel() {
         this.addGLEventListener(this);
     }
 
@@ -74,7 +74,7 @@ public class MyJoglCanvas extends GLCanvas implements GLEventListener, MouseList
         gl.glLightfv(GL_LIGHT0, GL_POSITION, new float[]{1.0f, 4.0f, 1.0f, 1.0f}, 0);
         gl.glPushMatrix();
         gl.glTranslatef(-1.5f, -1.5f, -6.0f); // translate into the screen
-        gl.glRotatef(rotationX , 0.0f, 1.0f, 0.0f);
+        gl.glRotatef(rotationX, 0.0f, 1.0f, 0.0f);
         gl.glRotatef(rotationY , 1.0f, 0.0f, 0.0f);
         model.draw(gl);
         gl.glPopMatrix();
