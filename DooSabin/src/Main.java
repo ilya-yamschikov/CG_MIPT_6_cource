@@ -37,7 +37,7 @@ public class Main {
                 // Create the top-level container
                 final JFrame frame = new JFrame(); // Swing's JFrame or AWT's Frame
 
-                //SETTINGS
+                //SETTINGS PANEL
                 ImageIcon downButtonIcon = new ImageIcon("down.png");
                 downButtonIcon.setImage(downButtonIcon.getImage().getScaledInstance(24, 20, java.awt.Image.SCALE_SMOOTH));
                 ImageIcon upButtonIcon = new ImageIcon("up.png");

@@ -73,7 +73,7 @@ public class MyJoglPanel extends GLJPanel implements GLEventListener, MouseListe
         // ----- Your OpenGL rendering code here (Render a white triangle for testing) -----
         gl.glLightfv(GL_LIGHT0, GL_POSITION, new float[]{1.0f, 4.0f, 1.0f, 1.0f}, 0);
         gl.glPushMatrix();
-        gl.glTranslatef(-1.5f, -1.5f, -6.0f); // translate into the screen
+        gl.glTranslatef(0.0f, 0.0f, -6.0f); // translate into the screen
         gl.glRotatef(rotationX, 0.0f, 1.0f, 0.0f);
         gl.glRotatef(rotationY , 1.0f, 0.0f, 0.0f);
         model.draw(gl);
