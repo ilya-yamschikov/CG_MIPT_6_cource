@@ -77,12 +77,12 @@ public class DooSabinSubdivider {
 
     private static Mesh generateMesh(Mesh meshProcurement, Map<Integer, ProcessingPoint> processingPoints, List<ProcessingEdge> processingEdges, List<ProcessingFace> processingFaces) {
         for (ProcessingFace face: processingFaces) {
-            meshProcurement.addFace(new Face(meshProcurement, face.newPoints).setColor(MyJoglPanel.GREEN));
+            meshProcurement.addFace(new Face(meshProcurement, face.newPoints).setColor(MyJoglPanel.WHITE));
         }
 
         for (ProcessingEdge edge: processingEdges) {
             if(edge.faceGenerated())
-                meshProcurement.addFace(new Face(meshProcurement, edge.newPoints).setColor(MyJoglPanel.YELLOW));
+                meshProcurement.addFace(new Face(meshProcurement, edge.newPoints).setColor(MyJoglPanel.GREEN));
         }
 
         for (Integer pointID: processingPoints.keySet()) {

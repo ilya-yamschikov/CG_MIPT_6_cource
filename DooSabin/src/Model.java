@@ -14,6 +14,20 @@ public class Model {
         this.subdivisions.add(mesh);
     }
 
+    public int addSubdivision() {
+        if (subdivisions.size() <= subdivisionsCount + 1) {
+            subdivisions.add(DooSabinSubdivider.process(subdivisions.get(subdivisionsCount)));
+        }
+        subdivisionsCount++;
+        return subdivisionsCount;
+    }
+
+    public int reduceSubdivisions() {
+        if (subdivisionsCount > 0)
+            subdivisionsCount--;
+        return subdivisionsCount;
+    }
+
     public void draw(GL2 gl) {
         draw(gl, subdivisions.get(subdivisionsCount));
     }

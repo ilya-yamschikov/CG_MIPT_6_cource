@@ -3,18 +3,18 @@ import geometry.Mesh;
 import javax.media.opengl.*;
 import javax.media.opengl.awt.GLJPanel;
 import javax.media.opengl.glu.GLU;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 
 import static javax.media.opengl.GL.*;  // GL constants
 import static javax.media.opengl.GL2.*; // GL2 constants
 
-public class MyJoglPanel extends GLJPanel implements GLEventListener, MouseListener, MouseMotionListener {
+public class MyJoglPanel extends GLJPanel implements GLEventListener, MouseListener, MouseMotionListener, MouseWheelListener {
     private GLU glu;  // for the GL Utility
 
     private float rotationX = 0.0f;
     private float rotationY = 0.0f;
+    private float zoom = -3.0f;
+    private float zoomAmount = 0.03f;
 
     private Model model = new Model(Mesh.CUBE);
 
@@ -77,29 +77,43 @@ public class MyJoglPanel extends GLJPanel implements GLEventListener, MouseListe
         // ----- Your OpenGL rendering code here (Render a white triangle for testing) -----
         gl.glLightfv(GL_LIGHT0, GL_POSITION, new float[]{1.0f, 4.0f, 1.0f, 1.0f}, 0);
         gl.glPushMatrix();
-        gl.glTranslatef(0.0f, 0.0f, -4.0f); // translate into the screen
+        gl.glTranslatef(0.0f, 0.0f, zoom); // translate into the screen
         gl.glRotatef(rotationX, 0.0f, 1.0f, 0.0f);
         gl.glRotatef(rotationY , 1.0f, 0.0f, 0.0f);
         model.draw(gl);
         gl.glPopMatrix();
     }
 
+    public int addModelSubdivisions() {
+        return model.addSubdivision();
+    }
+
+    public int reduceModelSubdivisions() {
+        return model.reduceSubdivisions();
+    }
+
     @Override
     public void dispose(GLAutoDrawable drawable) {}
 
+    @Override
     public void mouseClicked(MouseEvent e) {}
 
+    @Override
     public void mousePressed(MouseEvent e) {
         mousePositionX = e.getX();
         mousePositionY = e.getY();
     }
 
+    @Override
     public void mouseReleased(MouseEvent e) {}
 
+    @Override
     public void mouseEntered(MouseEvent e) {}
 
+    @Override
     public void mouseExited(MouseEvent e) {}
 
+    @Override
     public void mouseDragged(MouseEvent e) {
         rotationX += (e.getX() - mousePositionX)/ 2.0f;
         mousePositionX = e.getX();
@@ -107,6 +121,12 @@ public class MyJoglPanel extends GLJPanel implements GLEventListener, MouseListe
         mousePositionY = e.getY();
     }
 
+    @Override
     public void mouseMoved(MouseEvent e) {}
+
+    @Override
+    public void mouseWheelMoved(MouseWheelEvent e) {
+        zoom = zoom * (1.0f + zoomAmount * e.getWheelRotation());
+    }
 
 }
