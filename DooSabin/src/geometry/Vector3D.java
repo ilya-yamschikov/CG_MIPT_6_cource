@@ -1,5 +1,7 @@
 package geometry;
 
+import java.util.List;
+
 public class Vector3D {
     private double x;
     private double y;
@@ -20,14 +22,18 @@ public class Vector3D {
         return vector;
     }
 
-    public static Point3D getAverage(Vector3D ... vectors) {
+    public static Vector3D getAverage(List<Vector3D> vectors) {
+        return getAverage(vectors.toArray(new Vector3D[vectors.size()]));
+    }
+
+    public static Vector3D getAverage(Vector3D ... vectors) {
         double x = 0.0, y = 0.0, z = 0.0;
         for (Vector3D vector : vectors) {
             x += vector.x;
             y += vector.y;
             z += vector.z;
         }
-        return new Point3D(-1, x / vectors.length, y / vectors.length, z / vectors.length);
+        return new Vector3D(x / vectors.length, y / vectors.length, z / vectors.length);
     }
 
 

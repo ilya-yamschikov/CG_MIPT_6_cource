@@ -5,8 +5,12 @@ public class Point3D {
     private Vector3D vector;
 
     public Point3D(int id, double x, double y, double z) {
+        this(id, new Vector3D(x, y, z));
+    }
+
+    public Point3D(int id, Vector3D vector) {
         this.id = id;
-        this.vector = new Vector3D(x, y, z);
+        this.vector = vector;
     }
 
     public int getId() {

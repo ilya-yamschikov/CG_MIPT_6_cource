@@ -5,11 +5,13 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Face {
-    public List<Integer> points;
+    public final List<Integer> points;
+    private final Mesh mesh;
     private double[] normal;
     private float[] color = {1.0f, 1.0f, 1.0f};
 
-    public Face(Integer... points) {
+    public Face(Mesh mesh, Integer... points) {
+        this.mesh = mesh;
         if (points != null)
             this.points = Arrays.asList(points);
         else
@@ -40,6 +42,20 @@ public class Face {
         }
         this.color = color;
         return this;
+    }
+
+    public Integer getNextPointInFaceOrder(int inPointOrder) {
+        if (inPointOrder != points.size() - 1)
+            return points.get(inPointOrder + 1);
+        else
+            return points.get(0);
+    }
+
+    public Integer getPreviousPointInFaceOrder(int inPointOrder) {
+        if (inPointOrder != 0)
+            return points.get(inPointOrder - 1);
+        else
+            return points.get(points.size() - 1);
     }
 
     public void addPoint(Integer point) {
