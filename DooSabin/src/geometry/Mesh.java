@@ -1,9 +1,6 @@
 package geometry;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Mesh {
     public static final Mesh CUBE = getCube();
@@ -40,6 +37,10 @@ public class Mesh {
             outPoints.add(points.get(id));
         }
         return outPoints;
+    }
+
+    public Set<Integer> getAllPointsIDs() {
+        return points.keySet();
     }
 
     public List<Vector3D> getVectors(Integer ... ids) {
