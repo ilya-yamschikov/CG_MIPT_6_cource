@@ -8,7 +8,7 @@ import java.awt.event.*;
 import static javax.media.opengl.GL.*;  // GL constants
 import static javax.media.opengl.GL2.*; // GL2 constants
 
-public class MyJoglPanel extends GLJPanel implements ActionListener, GLEventListener, MouseListener, MouseMotionListener, MouseWheelListener {
+public class MyJoglPanel extends GLJPanel implements GLEventListener, MouseListener, MouseMotionListener, MouseWheelListener {
     private GLU glu;  // for the GL Utility
 
     private float rotationX = 0.0f;
@@ -16,7 +16,7 @@ public class MyJoglPanel extends GLJPanel implements ActionListener, GLEventList
     private float zoom = -3.0f;
     private float zoomAmount = 0.03f;
 
-    private Model model = new Model(Mesh.HEART);
+    private Model model = new Model(Mesh.TORUS);
 
     public static final float[] WHITE = {1.0f, 1.0f, 1.0f, 1.0f};
     public static final float[] GREY = {0.5f, 0.5f, 0.5f, 1.0f};
@@ -97,6 +97,18 @@ public class MyJoglPanel extends GLJPanel implements ActionListener, GLEventList
             this.model = new Model(Mesh.CUBE);
             return;
         }
+        if (model.equals("Heart")) {
+            this.model = new Model(Mesh.HEART);
+            return;
+        }
+        if (model.equals("Tetrahedron")) {
+            this.model = new Model(Mesh.TETRAHEDRON);
+            return;
+        }
+        if (model.equals("Torus")) {
+            this.model = new Model(Mesh.TORUS);
+            return;
+        }
 
         this.model = new Model(Mesh.CUBE);
     }
@@ -136,14 +148,6 @@ public class MyJoglPanel extends GLJPanel implements ActionListener, GLEventList
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
         zoom = zoom * (1.0f + zoomAmount * e.getWheelRotation());
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        String command = e.getActionCommand();
-        if (command.equals("Cube")) {
-            model = new Model(Mesh.CUBE);
-        }
     }
 
 }

@@ -75,7 +75,34 @@ public class Main {
                         GLPanel.setModel(e.getActionCommand());
                     }
                 });
+                MenuItem heartMenuItem = new MenuItem("Heart");
+                heartMenuItem.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        counter.setText("0");
+                        GLPanel.setModel(e.getActionCommand());
+                    }
+                });
+                MenuItem tetrahedronMenuItem = new MenuItem("Tetrahedron");
+                tetrahedronMenuItem.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        counter.setText("0");
+                        GLPanel.setModel(e.getActionCommand());
+                    }
+                });
+                MenuItem torusMenuItem = new MenuItem("Torus");
+                torusMenuItem.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        counter.setText("0");
+                        GLPanel.setModel(e.getActionCommand());
+                    }
+                });
                 menu.add(cubeMenuItem);
+                menu.add(heartMenuItem);
+                menu.add(tetrahedronMenuItem);
+                menu.add(torusMenuItem);
 
                 frame.setMenuBar(menuBar);
 
