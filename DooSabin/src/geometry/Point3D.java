@@ -2,29 +2,27 @@ package geometry;
 
 public class Point3D {
     private int id;
-
-    private double x;
-    private double y;
-    private double z;
+    private Vector3D vector;
 
     public Point3D(int id, double x, double y, double z) {
         this.id = id;
-        this.x = x;
-        this.y = y;
-        this.z = z;
+        this.vector = new Vector3D(x, y, z);
     }
 
     public int getId() {
         return id;
     }
 
-    public double[] toArray() {
-        double[] point = new double[3];
-        point[0] = x;
-        point[1] = y;
-        point[2] = z;
+    public void setId(int id) {
+        this.id = id;
+    }
 
-        return point;
+    public double[] toArray() {
+        return vector.toArray();
+    }
+
+    public Vector3D getVector() {
+        return vector;
     }
 
     @Override

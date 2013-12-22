@@ -34,7 +34,15 @@ public class Mesh {
         return points.get(id);
     }
 
+    public int getPointsSize() {
+        return points.size();
+    }
+
     public void addPoint(Point3D point) {
+        if (point.getId() < 0) {
+            System.out.println("Point ID cannot be < 0. Found: " + point.getId());
+            return;
+        }
         if (points.containsKey(point.getId())) {
             System.out.println("Mesh already contains point with id: '" + point + "'.");
             return;
