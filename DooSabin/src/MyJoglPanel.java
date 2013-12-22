@@ -18,10 +18,14 @@ public class MyJoglPanel extends GLJPanel implements GLEventListener, MouseListe
 
     private Model model = new Model(Mesh.CUBE);
 
-    private final float[] WHITE = {1.0f, 1.0f, 1.0f, 1.0f};
-    private final float[] DARK_GREY = {0.2f, 0.2f, 0.2f, 1.0f};
-    private final float[] BLACK = {0.0f, 0.0f, 0.0f, 1.0f};
-    private final float[] RED = {1.0f, 0.0f, 0.0f, 1.0f};
+    public static final float[] WHITE = {1.0f, 1.0f, 1.0f, 1.0f};
+    public static final float[] GREY = {0.5f, 0.5f, 0.5f, 1.0f};
+    public static final float[] DARK_GREY = {0.2f, 0.2f, 0.2f, 1.0f};
+    public static final float[] BLACK = {0.0f, 0.0f, 0.0f, 1.0f};
+    public static final float[] RED = {1.0f, 0.0f, 0.0f, 1.0f};
+    public static final float[] BLUE = {0.0f, 0.0f, 1.0f, 1.0f};
+    public static final float[] GREEN = {0.0f, 1.0f, 0.0f, 1.0f};
+    public static final float[] YELLOW = {1.0f, 1.0f, 0.0f, 1.0f};
 
     private int mousePositionX;
     private int mousePositionY;
@@ -73,7 +77,7 @@ public class MyJoglPanel extends GLJPanel implements GLEventListener, MouseListe
         // ----- Your OpenGL rendering code here (Render a white triangle for testing) -----
         gl.glLightfv(GL_LIGHT0, GL_POSITION, new float[]{1.0f, 4.0f, 1.0f, 1.0f}, 0);
         gl.glPushMatrix();
-        gl.glTranslatef(0.0f, 0.0f, -6.0f); // translate into the screen
+        gl.glTranslatef(0.0f, 0.0f, -4.0f); // translate into the screen
         gl.glRotatef(rotationX, 0.0f, 1.0f, 0.0f);
         gl.glRotatef(rotationY , 1.0f, 0.0f, 0.0f);
         model.draw(gl);

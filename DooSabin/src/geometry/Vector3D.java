@@ -36,9 +36,17 @@ public class Vector3D {
         return new Vector3D(x / vectors.length, y / vectors.length, z / vectors.length);
     }
 
+    public static Vector3D subtract(Vector3D u, Vector3D v) {
+        return new Vector3D(u.x- v.x, u.y - v.y, u.z - v.z);
+    }
 
     public static Vector3D crossProduct(Vector3D u, Vector3D v) {
-        return new Vector3D(u.y * v.z - u.z * v.y, - u.x * v.z + u.z * v.y, u.x * v.y - u.y * v.x);
+        return new Vector3D(u.y * v.z - u.z * v.y, - u.x * v.z + u.z * v.x, u.x * v.y - u.y * v.x);
+    }
+
+    public static Vector3D normalize(Vector3D u) {
+        double norm = Math.sqrt(u.x * u.x + u.y * u.y + u.z * u.z);
+        return new Vector3D(u.x / norm, u.y / norm, u.z / norm);
     }
 
     @Override

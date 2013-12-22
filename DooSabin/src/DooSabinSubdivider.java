@@ -77,12 +77,12 @@ public class DooSabinSubdivider {
 
     private static Mesh generateMesh(Mesh meshProcurement, Map<Integer, ProcessingPoint> processingPoints, List<ProcessingEdge> processingEdges, List<ProcessingFace> processingFaces) {
         for (ProcessingFace face: processingFaces) {
-            meshProcurement.addFace(new Face(meshProcurement, face.newPoints));
+            meshProcurement.addFace(new Face(meshProcurement, face.newPoints).setColor(MyJoglPanel.GREEN));
         }
 
         for (ProcessingEdge edge: processingEdges) {
             if(edge.faceGenerated())
-                meshProcurement.addFace(new Face(meshProcurement, edge.newPoints));
+                meshProcurement.addFace(new Face(meshProcurement, edge.newPoints).setColor(MyJoglPanel.YELLOW));
         }
 
         for (Integer pointID: processingPoints.keySet()) {
@@ -99,7 +99,7 @@ public class DooSabinSubdivider {
             }
             pointsToAdd[point.newPoints.size() - 1] = nextPoint;
 
-            meshProcurement.addFace(new Face(meshProcurement, pointsToAdd));
+            meshProcurement.addFace(new Face(meshProcurement, pointsToAdd).setColor(MyJoglPanel.BLUE));
         }
 
         return meshProcurement;
@@ -146,7 +146,10 @@ public class DooSabinSubdivider {
         }
 
         public boolean faceGenerated() {
-            return newPoints.size() > 2;
+            for (ProcessingEdge edge : associatedEdges)
+                if (!edge.faceGenerated())
+                    return false;
+            return true;
         }
     }
 

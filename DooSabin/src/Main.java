@@ -38,22 +38,16 @@ public class Main {
                 final JFrame frame = new JFrame(); // Swing's JFrame or AWT's Frame
 
                 //SETTINGS PANEL
-                ImageIcon downButtonIcon = new ImageIcon("down.png");
-                downButtonIcon.setImage(downButtonIcon.getImage().getScaledInstance(24, 20, java.awt.Image.SCALE_SMOOTH));
-                ImageIcon upButtonIcon = new ImageIcon("up.png");
-                upButtonIcon.setImage(upButtonIcon.getImage().getScaledInstance(24,20,java.awt.Image.SCALE_SMOOTH));
                 JPanel settingsPanel = new JPanel();
                 settingsPanel.setLayout(new GridBagLayout());
-                JButton buttonUp = new JButton();
-                buttonUp.setIcon(upButtonIcon);
-                JButton buttonDown = new JButton();
-                buttonDown.setIcon(downButtonIcon);
+                JButton buttonUp = new JButton("<");
+                JButton buttonDown = new JButton(">");
                 JLabel counter = new JLabel("0");
                 settingsPanel.add(buttonUp, getConstraints(0,0));
-                settingsPanel.add(counter, getConstraints(0,1));
-                settingsPanel.add(buttonDown, getConstraints(0,2));
+                settingsPanel.add(counter, getConstraints(1,0));
+                settingsPanel.add(buttonDown, getConstraints(2,0));
                 Container pane = frame.getContentPane();
-                pane.add(settingsPanel, BorderLayout.LINE_END);
+                pane.add(settingsPanel, BorderLayout.PAGE_END);
 
 
                 pane.add(GLPanel);
