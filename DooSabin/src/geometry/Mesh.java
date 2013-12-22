@@ -200,10 +200,8 @@ public class Mesh {
         double[] center = {-0.5, -0.5, 0.16};
         double scale = 0.33;
 
-        torus.addPoint(new Point3D(1,  0.0 * scale + center[0], 0.0 * scale + center[1], 0.0 * scale + center[2]));
         torus.addPoint(new Point3D(2,  1.0 * scale + center[0], 0.0 * scale + center[1], 0.0 * scale + center[2]));
         torus.addPoint(new Point3D(3,  2.0 * scale + center[0], 0.0 * scale + center[1], 0.0 * scale + center[2]));
-        torus.addPoint(new Point3D(4,  3.0 * scale + center[0], 0.0 * scale + center[1], 0.0 * scale + center[2]));
         torus.addPoint(new Point3D(5,  0.0 * scale + center[0], 1.0 * scale + center[1], 0.0 * scale + center[2]));
         torus.addPoint(new Point3D(6,  1.0 * scale + center[0], 1.0 * scale + center[1], 0.0 * scale + center[2]));
         torus.addPoint(new Point3D(7,  2.0 * scale + center[0], 1.0 * scale + center[1], 0.0 * scale + center[2]));
@@ -212,14 +210,10 @@ public class Mesh {
         torus.addPoint(new Point3D(10,  1.0 * scale + center[0], 2.0 * scale + center[1], 0.0 * scale + center[2]));
         torus.addPoint(new Point3D(11,  2.0 * scale + center[0], 2.0 * scale + center[1], 0.0 * scale + center[2]));
         torus.addPoint(new Point3D(12,  3.0 * scale + center[0], 2.0 * scale + center[1], 0.0 * scale + center[2]));
-        torus.addPoint(new Point3D(13,  0.0 * scale + center[0], 3.0 * scale + center[1], 0.0 * scale + center[2]));
         torus.addPoint(new Point3D(14,  1.0 * scale + center[0], 3.0 * scale + center[1], 0.0 * scale + center[2]));
         torus.addPoint(new Point3D(15,  2.0 * scale + center[0], 3.0 * scale + center[1], 0.0 * scale + center[2]));
-        torus.addPoint(new Point3D(16,  3.0 * scale + center[0], 3.0 * scale + center[1], 0.0 * scale + center[2]));
-        torus.addPoint(new Point3D(17,  0.0 * scale + center[0], 0.0 * scale + center[1], -1.0 * scale + center[2]));
         torus.addPoint(new Point3D(18,  1.0 * scale + center[0], 0.0 * scale + center[1], -1.0 * scale + center[2]));
         torus.addPoint(new Point3D(19,  2.0 * scale + center[0], 0.0 * scale + center[1], -1.0 * scale + center[2]));
-        torus.addPoint(new Point3D(20,  3.0 * scale + center[0], 0.0 * scale + center[1], -1.0 * scale + center[2]));
         torus.addPoint(new Point3D(21,  0.0 * scale + center[0], 1.0 * scale + center[1], -1.0 * scale + center[2]));
         torus.addPoint(new Point3D(22,  1.0 * scale + center[0], 1.0 * scale + center[1], -1.0 * scale + center[2]));
         torus.addPoint(new Point3D(23,  2.0 * scale + center[0], 1.0 * scale + center[1], -1.0 * scale + center[2]));
@@ -228,44 +222,38 @@ public class Mesh {
         torus.addPoint(new Point3D(26,  1.0 * scale + center[0], 2.0 * scale + center[1], -1.0 * scale + center[2]));
         torus.addPoint(new Point3D(27,  2.0 * scale + center[0], 2.0 * scale + center[1], -1.0 * scale + center[2]));
         torus.addPoint(new Point3D(28,  3.0 * scale + center[0], 2.0 * scale + center[1], -1.0 * scale + center[2]));
-        torus.addPoint(new Point3D(29,  0.0 * scale + center[0], 3.0 * scale + center[1], -1.0 * scale + center[2]));
         torus.addPoint(new Point3D(30,  1.0 * scale + center[0], 3.0 * scale + center[1], -1.0 * scale + center[2]));
         torus.addPoint(new Point3D(31,  2.0 * scale + center[0], 3.0 * scale + center[1], -1.0 * scale + center[2]));
-        torus.addPoint(new Point3D(32,  3.0 * scale + center[0], 3.0 * scale + center[1], -1.0 * scale + center[2]));
 
         //FACE
-        torus.addFace(new Face(torus, 1, 2, 6, 5));
+        torus.addFace(new Face(torus, 2, 6, 5));
         torus.addFace(new Face(torus, 2, 3, 7, 6));
-        torus.addFace(new Face(torus, 3, 4, 8, 7));
+        torus.addFace(new Face(torus, 3, 8, 7));
         torus.addFace(new Face(torus, 5, 6, 10, 9));
         torus.addFace(new Face(torus, 7, 8, 12, 11));
-        torus.addFace(new Face(torus, 9, 10, 14, 13));
+        torus.addFace(new Face(torus, 9, 10, 14));
         torus.addFace(new Face(torus, 10, 11, 15, 14));
-        torus.addFace(new Face(torus, 11, 12, 16, 15));
+        torus.addFace(new Face(torus, 11, 12, 15));
 
         //BACK
-        torus.addFace(new Face(torus, 21, 22, 18, 17));
+        torus.addFace(new Face(torus, 21, 22, 18));
         torus.addFace(new Face(torus, 22, 23, 19, 18));
-        torus.addFace(new Face(torus, 23, 24, 20, 19));
+        torus.addFace(new Face(torus, 23, 24, 19));
         torus.addFace(new Face(torus, 25, 26, 22, 21));
         torus.addFace(new Face(torus, 27, 28, 24, 23));
-        torus.addFace(new Face(torus, 29, 30, 26, 25));
+        torus.addFace(new Face(torus, 30, 26, 25));
         torus.addFace(new Face(torus, 30, 31, 27, 26));
-        torus.addFace(new Face(torus, 31, 32, 28, 27));
+        torus.addFace(new Face(torus, 31, 28, 27));
 
         //OUT
-        torus.addFace(new Face(torus, 17, 18, 2, 1));
+        torus.addFace(new Face(torus, 2, 5, 21, 18));
         torus.addFace(new Face(torus, 18, 19, 3, 2));
-        torus.addFace(new Face(torus, 19, 20, 4, 3));
-        torus.addFace(new Face(torus, 20, 24, 8, 4));
+        torus.addFace(new Face(torus, 19, 24, 8, 3));
         torus.addFace(new Face(torus, 24, 28, 12, 8));
-        torus.addFace(new Face(torus, 28, 32, 16, 12));
-        torus.addFace(new Face(torus, 15, 16, 32, 31));
+        torus.addFace(new Face(torus, 28, 31, 15, 12));
         torus.addFace(new Face(torus, 14, 15, 31, 30));
-        torus.addFace(new Face(torus, 13, 14, 30, 29));
-        torus.addFace(new Face(torus, 9, 13, 29, 25));
+        torus.addFace(new Face(torus, 9, 14, 30, 25));
         torus.addFace(new Face(torus, 5, 9, 25, 21));
-        torus.addFace(new Face(torus, 1, 5, 21, 17));
 
         //IN
         torus.addFace(new Face(torus, 6, 7, 23, 22));
