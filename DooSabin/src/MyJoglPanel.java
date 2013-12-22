@@ -8,7 +8,7 @@ import java.awt.event.*;
 import static javax.media.opengl.GL.*;  // GL constants
 import static javax.media.opengl.GL2.*; // GL2 constants
 
-public class MyJoglPanel extends GLJPanel implements GLEventListener, MouseListener, MouseMotionListener, MouseWheelListener {
+public class MyJoglPanel extends GLJPanel implements ActionListener, GLEventListener, MouseListener, MouseMotionListener, MouseWheelListener {
     private GLU glu;  // for the GL Utility
 
     private float rotationX = 0.0f;
@@ -16,7 +16,7 @@ public class MyJoglPanel extends GLJPanel implements GLEventListener, MouseListe
     private float zoom = -3.0f;
     private float zoomAmount = 0.03f;
 
-    private Model model = new Model(Mesh.CUBE);
+    private Model model = new Model(Mesh.HEART);
 
     public static final float[] WHITE = {1.0f, 1.0f, 1.0f, 1.0f};
     public static final float[] GREY = {0.5f, 0.5f, 0.5f, 1.0f};
@@ -92,6 +92,15 @@ public class MyJoglPanel extends GLJPanel implements GLEventListener, MouseListe
         return model.reduceSubdivisions();
     }
 
+    public void setModel(String model) {
+        if (model.equals("Cube")) {
+            this.model = new Model(Mesh.CUBE);
+            return;
+        }
+
+        this.model = new Model(Mesh.CUBE);
+    }
+
     @Override
     public void dispose(GLAutoDrawable drawable) {}
 
@@ -127,6 +136,14 @@ public class MyJoglPanel extends GLJPanel implements GLEventListener, MouseListe
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
         zoom = zoom * (1.0f + zoomAmount * e.getWheelRotation());
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String command = e.getActionCommand();
+        if (command.equals("Cube")) {
+            model = new Model(Mesh.CUBE);
+        }
     }
 
 }

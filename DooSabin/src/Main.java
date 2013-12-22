@@ -63,6 +63,21 @@ public class Main {
                 Container pane = frame.getContentPane();
                 pane.add(settingsPanel, BorderLayout.PAGE_END);
 
+                // MENU BAR
+                MenuBar menuBar = new MenuBar();
+                Menu menu = new Menu("Objects");
+                menuBar.add(menu);
+                MenuItem cubeMenuItem = new MenuItem("Cube");
+                cubeMenuItem.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        counter.setText("0");
+                        GLPanel.setModel(e.getActionCommand());
+                    }
+                });
+                menu.add(cubeMenuItem);
+
+                frame.setMenuBar(menuBar);
 
                 pane.add(GLPanel);
                 frame.addWindowListener(new WindowAdapter() {
