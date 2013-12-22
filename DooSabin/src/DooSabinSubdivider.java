@@ -72,7 +72,58 @@ public class DooSabinSubdivider {
 
             processingFaces.add(processingFace);
         }
-        return newMesh;
+        return generateMesh(newMesh, processingPoints, processingEdges, processingFaces);
+    }
+
+    private static Mesh generateMesh(Mesh meshProcurement, Map<Integer, ProcessingPoint> processingPoints, List<ProcessingEdge> processingEdges, List<ProcessingFace> processingFaces) {
+        for (ProcessingFace face: processingFaces) {
+            meshProcurement.addFace(new Face(meshProcurement, face.newPoints));
+        }
+
+        for (ProcessingEdge edge: processingEdges) {
+            if(edge.faceGenerated())
+                meshProcurement.addFace(new Face(meshProcurement, edge.newPoints));
+        }
+
+        for (Integer pointID: processingPoints.keySet()) {
+            ProcessingPoint point = processingPoints.get(pointID);
+            if (!point.faceGenerated())
+                continue;
+
+            Integer[] pointsToAdd = new Integer[point.newPoints.size()];
+            Integer nextPoint = point.newPoints.get(0);
+            for (int i = 0; i < point.newPoints.size() - 1; i++) {
+                pointsToAdd[i] = nextPoint;
+                nextPoint = getNextPointForProcessingPoint(nextPoint, point);
+
+            }
+            pointsToAdd[point.newPoints.size() - 1] = nextPoint;
+
+            meshProcurement.addFace(new Face(meshProcurement, pointsToAdd));
+        }
+
+        return meshProcurement;
+    }
+
+    private static Integer getNextPointForProcessingPoint(Integer currentFacePoint, ProcessingPoint processingPoint) {
+        for (ProcessingEdge edge: processingPoint.associatedEdges) {
+            Integer prevPointInEdge = getPreviousPointInEdgeFace(edge, currentFacePoint);
+            if (prevPointInEdge != -1 && processingPoint.newPoints.contains(prevPointInEdge))
+                return prevPointInEdge;
+        }
+        return -1;
+    }
+
+    private static Integer getPreviousPointInEdgeFace(ProcessingEdge edge,Integer currentFacePoint) {
+        for (int i = 0; i < edge.newPoints.length; i++) {
+            if (edge.newPoints[i].equals(currentFacePoint)) {
+                if (i == 0)
+                    return edge.newPoints[3];
+                else
+                    return edge.newPoints[i-1];
+            }
+        }
+        return -1;
     }
 
     private static class ProcessingPoint {
@@ -93,17 +144,26 @@ public class DooSabinSubdivider {
             }
             return null;
         }
+
+        public boolean faceGenerated() {
+            return newPoints.size() > 2;
+        }
     }
 
     private static class ProcessingEdge {
         public Vector3D midPoint;
         public int pointFrom, pointTo;
-        public int[] newPoints = new int[4];
+        public Integer[] newPoints;
 
         private ProcessingEdge(int pointFrom, int pointTo, Vector3D midPoint) {
             this.pointFrom = pointFrom;
             this.pointTo = pointTo;
             this.midPoint = midPoint;
+            this.newPoints = new Integer[]{-1, -1, -1, -1};
+        }
+
+        public boolean faceGenerated() {
+            return (newPoints[0] != -1) && (newPoints[1] != -1) && (newPoints[2] != -1) && (newPoints[3] != -1);
         }
     }
 

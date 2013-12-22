@@ -10,6 +10,11 @@ public class Face {
     private double[] normal;
     private float[] color = {1.0f, 1.0f, 1.0f};
 
+    public Face(Mesh mesh, List<Integer> points) {
+        this.mesh = mesh;
+        this.points = points;
+    }
+
     public Face(Mesh mesh, Integer... points) {
         this.mesh = mesh;
         if (points != null)
