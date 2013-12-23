@@ -16,7 +16,7 @@ public class MyJoglPanel extends GLJPanel implements GLEventListener, MouseListe
     private float zoom = -3.0f;
     private float zoomAmount = 0.03f;
 
-    private Model model = new Model(Mesh.TORUS);
+    private Model model = new Model(Mesh.CUBE);
 
     public static final float[] WHITE = {1.0f, 1.0f, 1.0f, 1.0f};
     public static final float[] GREY = {0.5f, 0.5f, 0.5f, 1.0f};
@@ -30,7 +30,8 @@ public class MyJoglPanel extends GLJPanel implements GLEventListener, MouseListe
     private int mousePositionX;
     private int mousePositionY;
 
-    public MyJoglPanel() {
+    public MyJoglPanel(GLCapabilities capabilities) {
+        super(capabilities);
         this.addGLEventListener(this);
     }
 

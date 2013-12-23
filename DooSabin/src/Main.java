@@ -1,5 +1,7 @@
 import com.jogamp.opengl.util.FPSAnimator;
 
+import javax.media.opengl.GLCapabilities;
+import javax.media.opengl.GLProfile;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -30,7 +32,10 @@ public class Main {
             @Override
             public void run() {
                 // Create the OpenGL rendering panel
-                final MyJoglPanel GLPanel = new MyJoglPanel();
+                GLProfile glp = GLProfile.getDefault();
+                GLCapabilities capabilities = new GLCapabilities(glp);
+                capabilities.setDoubleBuffered(true);
+                final MyJoglPanel GLPanel = new MyJoglPanel(capabilities);
                 GLPanel.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
 
                 // Create a animator that drives panel' display() at the specified FPS.
